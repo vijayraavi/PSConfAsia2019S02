@@ -34,3 +34,42 @@ catch [System.Management.Automation.DriveNotFoundException] {
 catch {
     'no biggie!'
 }
+
+function Invoke-SoManyErrors {
+    throw 1
+    throw 2
+    throw 3
+}
+
+Invoke-SoManyErrors
+
+function Invoke-SoManyErrors {
+    trap {
+        'Oh no!'
+    }
+    
+    throw 1
+    throw 2
+    throw 3
+}
+
+Invoke-SoManyErrors
+
+Get-Item -Name 'pewpewpew'
+
+$?
+$?
+
+1/0
+
+$OldErrorActionPreference = $ErrorActionPreference
+$ErrorActionPreference = 'SilentlyContinue'
+
+1/0
+
+$ErrorActionPreference = $OldErrorActionPreference
+
+0..4 | % {
+    $ErrorActionPreference = $_
+    "$_ : $ErrorActionPreference"
+}
