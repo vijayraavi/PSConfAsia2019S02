@@ -69,7 +69,8 @@ $ErrorActionPreference = 'SilentlyContinue'
 
 $ErrorActionPreference = $OldErrorActionPreference
 
-0..4 | % {
-    $ErrorActionPreference = $_
-    "$_ : $ErrorActionPreference"
+0..6 | % {
+    '{0} : {1}' -f $_, [System.Management.Automation.ActionPreference]$_
 }
+
+[System.Management.Automation.ActionPreference].GetEnumNames()
