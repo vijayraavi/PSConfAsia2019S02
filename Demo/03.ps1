@@ -5,7 +5,7 @@
 function Invoke-PewPew {
     [CmdletBinding()]
     param (
-        [Parameter()]
+        [Parameter(Mandatory)]
         [validateset('Luke','Han')]
         $Character
     )
@@ -15,9 +15,7 @@ function Invoke-PewPew {
         'Han' = 'todo'
     }
 
-    if ($Character) {
-        $id = $HashChar.$Character
-    }
+    $id = $HashChar.$Character
 
     $person = Invoke-RestMethod -Uri http://swapi.co/api/people/$Id
     $films = foreach ($f in $person.films) {
